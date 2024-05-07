@@ -963,14 +963,40 @@ self-attention块和MLP块分别对应了一个layer normalization。每个layer
 
 综上，共有 $3N$ 字节
 
-> 另有一说, 会有少量与模型参数量大小无关的花销, 这些花销一般不到 $20\%$​
+> 另有一说, 会有少量与模型参数量大小无关的花销, 这些花销一般不到 $20\%$ | 未有 KV cache​
 >
 > 所以有如下等式: ([Transformer Inference Arithmetic | kipply's blog](https://kipp.ly/transformer-inference-arithmetic/))
 > $$
 > \mathrm{T o t a l ~ M e m o r y}_{\mathrm{I n f e r e n c e}} \approx( 1. 2 ) \times\mathrm{M o d e l ~ M e m o r y}
 > $$
 
-
+> #### KV cache 的计算量分析
+>
+> > [大模型推理加速：看图学KV Cache - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/662498827)
+> >
+> > [LLM（二十）：漫谈 KV Cache 优化方法，深度理解 StreamingLLM - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/659770503)
+> >
+> > [[LLM\]KV cache详解 图示，显存，计算量分析，代码 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/646577898)
+>
+> KV cache 用于 Self-Attention 层的计算, 旨在用空间换时间. 
+>
+> 没有使用 KV cache 的计算量 为 : (记 Embedding Size 为 H)
+>
+> 第一个Token 的 QK 计算量为 $1×H×1$ QKT×V 计算次数为 $1 × 1 × H$ -> 合计为 $2 × H × 1^2$
+>
+> 第二个Token 计算量为 $2 × H × 2^2$
+>
+> 长为 L 的 序列 , 第 L 的计算量为 $2 × H × L^2$
+>
+> ---
+>
+> 使用 KV cache 
+>
+> 第一个Token 的 QK 计算量为 $1×H×1$ QKT×V 计算次数为 $1 × 1 × H$ 合计为 $2 × H × 1^2$
+>
+> 第二个Token 的 QK 计算量为 $1×H×2$ QKT×V 计算次数为 $1 × 2 × H$  合计为 $2 × H × 2 $
+>
+> 长为 L 的 序列 , 第 L 的计算量为 $2 × H × L$
 
 通过上述分析可以看出，在训练阶段，大语言模型的显存占用量远大于推理阶段。这主要是因为训练阶段需要额外存储梯度和优化器状态，并且需要更大的批次大小和更多的Decoder层来实现更好的训练效果。
 
