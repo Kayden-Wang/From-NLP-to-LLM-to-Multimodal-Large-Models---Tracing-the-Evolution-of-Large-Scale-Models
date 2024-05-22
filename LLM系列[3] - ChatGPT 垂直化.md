@@ -470,6 +470,8 @@ QLoRA为参数高效微调技术的发展提供了新的思路,其量化与低�
 > Information : [落地应用 1 - TorchV Bot](https://www.zhihu.com/question/637421964/answer/3375911880)
 >
 > Information : [落地应用 2 -  Mr History](https://www.zhihu.com/question/642650878/answer/3412436867)
+>
+> **Practice : [关于 RAG 的优化方案及评估 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/681421145) -> 好文**
 
 检索增强生成(RAG)是一种将外部知识库中的信息与语言模型(LLM)相结合的技术, 它能够显著提升LLM在知识密集型任务上的表现。本文系统梳理了RAG技术的发展历程,概括了RAG的三种范式: 朴素RAG(Naive RAG)、进阶RAG(Advanced RAG) 和 模块化RAG(Modular RAG)。
 

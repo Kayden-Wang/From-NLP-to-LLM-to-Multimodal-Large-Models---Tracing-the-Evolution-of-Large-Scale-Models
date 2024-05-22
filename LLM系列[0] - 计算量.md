@@ -1002,6 +1002,8 @@ self-attention块和MLP块分别对应了一个layer normalization。每个layer
 
 # 3 LLM 并行训练
 
+> **[从啥也不会到DeepSpeed————一篇大模型分布式训练的学习过程总结 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/688873027) -> [Important]**
+
 <img src="assets\image-20240325135555449.png" alt="image-20240325135555449" style="zoom:50%;" />
 
 随着语言模型规模的不断增长，单机训练已经无法满足超大规模语言模型的计算需求。

@@ -1580,6 +1580,8 @@ where $q_m, k_n$ are column vectors. The heuristic is that given the pair $m, n$
 
 #### 2 RoPE
 
+> [RoPE可能是LLM时代的Resnet - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/641865355)
+
 Attention 得分表示的是, 在 m($Q$) 的前提下, 应该对 Token $n$ 投入多少的注意力. 
 
 位置编码编码的是位置信息, 而Token与Token的交互也正是通过Attention机制联系到一起的, 具体而言是注意力分数(Attention Score). 而 RoPE 的中心思想很简单: 即 Attention分数, 应该仅仅取决于两个 Token Embedding, 及两者之间的相对位置信息 $m-n$. 数学形式如下:
